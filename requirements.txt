@@ -1,0 +1,29 @@
+# AetherWall v4.0.0 runtime manifest
+#
+# Python packages installed into AetherWall's isolated virtual environment:
+PySide6>=6.7
+psutil>=6.0
+Pillow>=10.0
+
+# Arch/CachyOS packages checked and installed automatically at startup:
+# ARCH: python
+# ARCH: python-pip
+# ARCH: ffmpeg
+# ARCH: qt6-tools
+# ARCH: qt6-declarative
+# ARCH: qt6-multimedia
+# ARCH: qt6-5compat
+# ARCH: qt6-multimedia-ffmpeg
+# ARCH: gstreamer
+# ARCH: gst-plugins-base
+# ARCH: gst-plugins-good
+# ARCH: gst-libav
+#
+# Runtime/platform requirements:
+# - KDE Plasma 6
+# - KWin Wayland (recommended/tested)
+# - plasmashell with Plasma/Wallpaper support
+# - a working user D-Bus session
+#
+# AetherWall does NOT require mpv, swaybg, mpvpaper or a second wallpaper engine.
+# Video is rendered inside the native AetherWall Plasma wallpaper using QtMultimedia.

@@ -1,0 +1,14 @@
+{
+  "KPlugin": {
+    "Id": "org.aetherwall.widget",
+    "Name": "AetherWall Reactive HUD",
+    "Description": "A compact AetherWall bubble-glass system HUD widget",
+    "Version": "4.0.0",
+    "License": "MIT",
+    "Category": "Utilities",
+    "Authors": [{"Name": "AetherWall", "Email": "aetherwall@localhost"}],
+    "Icon": "aetherwall"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "KPackageStructure": "Plasma/Applet"
+}

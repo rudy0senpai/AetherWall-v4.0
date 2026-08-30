@@ -1,0 +1,20 @@
+{
+  "KPlugin": {
+    "Id": "org.aetherwall.wallpaper",
+    "Name": "AetherWall Image + Reactive HUD",
+    "Description": "Static image wallpaper with AetherWall reactive system HUD",
+    "Version": "4.0.0",
+    "License": "MIT",
+    "Category": "Wallpaper",
+    "Authors": [
+      {
+        "Name": "AetherWall",
+        "Email": "aetherwall@localhost"
+      }
+    ],
+    "Icon": "aetherwall"
+  },
+  "KPackageStructure": "Plasma/Wallpaper",
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "X-KDE-ParentApp": "org.kde.plasmashell"
+}

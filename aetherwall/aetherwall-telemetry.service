@@ -1,0 +1,14 @@
+[Unit]
+Description=AetherWall live telemetry server
+After=graphical-session.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/.local/share/aetherwall
+ExecStart=%h/.local/share/aetherwall/.venv/bin/python -m aetherwall.telemetry_server
+Restart=always
+RestartSec=1
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

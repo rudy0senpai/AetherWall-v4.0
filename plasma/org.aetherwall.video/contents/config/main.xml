@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0">
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="mediaPath" type="String"><default></default></entry>
+    <entry name="overlayPath" type="String"><default></default></entry>
+    <entry name="overlayPathB" type="String"><default></default></entry>
+    <entry name="fitMode" type="String"><default>fill</default></entry>
+    <entry name="mode" type="String"><default>video</default></entry>
+    <entry name="revision" type="String"><default>0</default></entry>
+    <entry name="reactiveEnabled" type="Bool"><default>true</default></entry>
+    <entry name="blurEnabled" type="Bool"><default>true</default></entry>
+    <entry name="blurStrength" type="Int"><default>65</default></entry>
+    <entry name="showTitle" type="Bool"><default>true</default></entry>
+    <entry name="showClock" type="Bool"><default>true</default></entry>
+    <entry name="showSystem" type="Bool"><default>true</default></entry>
+    <entry name="showMeters" type="Bool"><default>true</default></entry>
+    <entry name="showHistory" type="Bool"><default>true</default></entry>
+    <entry name="showDock" type="Bool"><default>true</default></entry>
+  </group>
+  <entry name="telemetryPath" type="String"><default></default></entry>
+</kcfg>
