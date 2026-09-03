@@ -29,16 +29,16 @@ Item {
     function X(v) { return ox + v*s; }
     function Y(v) { return oy + v*s; }
 
-    property color panelColor: "#070b17e8"
+    property color panelColor: "#e8070b17"
     property color textColor: "#f5f7ff"
     property color mutedColor: "#b9c3d7"
     property color accentColor: "#9b4bff"
     property color accent2Color: "#28b9ff"
     property color accent3Color: "#6eff37"
-    property color gridColor: "#50556e55"
-    property color trackColor: "#282d41b8"
-    property color edgeColor: "#ffffff30"
-    property color shadowColor: "#00000088"
+    property color gridColor: "#5550556e"
+    property color trackColor: "#b8282d41"
+    property color edgeColor: "#30ffffff"
+    property color shadowColor: "#88000000"
     property var zoneThemes: ({})
 
     function clamp(v) { return Math.max(0, Math.min(100, Number(v) || 0)); }

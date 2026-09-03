@@ -6,10 +6,10 @@ Item {
     property rect sourceRect: Qt.rect(0, 0, width, height)
     property bool blurEnabled: true
     property real blurStrength: 0.65
-    property color panelColor: "#07101de0"
-    property color edgeColor: "#ffffff42"
+    property color panelColor: "#e007101d"
+    property color edgeColor: "#42ffffff"
     property color accent: "#b05cff"
-    property color shadowColor: "#000000aa"
+    property color shadowColor: "#aa000000"
     property real radius: 22
 
     // A soft offset layer creates the raised / bubble-glass depth.
@@ -48,14 +48,14 @@ Item {
 
     // Glossy top edge and lower inner reflection.
     Rectangle {
-        x: width * 0.06; y: height * 0.06
-        width: width * 0.38; height: Math.max(1, height * 0.012)
+        x: root.width * 0.06; y: root.height * 0.06
+        width: root.width * 0.38; height: Math.max(1, root.height * 0.012)
         radius: height
-        color: "#ffffff55"
+        color: "#55ffffff"
     }
     Rectangle {
-        x: width * 0.08; y: height * 0.88
-        width: width * 0.52; height: Math.max(1, height * 0.008)
+        x: root.width * 0.08; y: root.height * 0.88
+        width: root.width * 0.52; height: Math.max(1, root.height * 0.008)
         radius: height
         color: root.accent
         opacity: 0.18

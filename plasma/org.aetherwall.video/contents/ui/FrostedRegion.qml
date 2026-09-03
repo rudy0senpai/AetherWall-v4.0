@@ -5,7 +5,6 @@ Item {
     id: root
     property Item sourceItem
     property rect sourceRect: Qt.rect(0, 0, width, height)
-    property bool enabled: true
     property real strength: 0.65
     clip: true
 

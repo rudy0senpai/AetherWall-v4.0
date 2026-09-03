@@ -17,6 +17,6 @@
     <entry name="showMeters" type="Bool"><default>true</default></entry>
     <entry name="showHistory" type="Bool"><default>true</default></entry>
     <entry name="showDock" type="Bool"><default>true</default></entry>
+    <entry name="telemetryPath" type="String"><default></default></entry>
   </group>
-  <entry name="telemetryPath" type="String"><default></default></entry>
 </kcfg>

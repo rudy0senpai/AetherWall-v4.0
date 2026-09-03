@@ -22,16 +22,20 @@ def cpu_average_temperature() -> float | None:
 
     preferred = []
     fallback = []
-    cpu_names = ("coretemp", "k10temp", "zenpower", "cpu", "processor", "x86_pkg_temp", "thinkpad")
+    cpu_names = ("coretemp", "k10temp", "zenpower", "cpu", "processor", "x86_pkg_temp", "thinkpad", "soc_thermal", "cpu_thermal", "acpitz")
+    non_cpu_names = ("nvme", "wifi", "wireless", "iwlwifi", "battery", "amdgpu", "nouveau")
     for name, entries in groups.items():
-        target = preferred if any(token in name.lower() for token in cpu_names) else fallback
+        lname = name.lower()
+        if any(token in lname for token in non_cpu_names):
+            continue
+        target = preferred if any(token in lname for token in cpu_names) else fallback
         for entry in entries:
             current = getattr(entry, "current", None)
             try:
                 value = float(current)
             except (TypeError, ValueError):
                 continue
-            if -20.0 < value < 150.0:
+            if 0.0 < value < 125.0:
                 target.append(value)
 
     readings = preferred or fallback
@@ -39,7 +43,7 @@ def cpu_average_temperature() -> float | None:
 
 
 def sample():
-    cpu = float(psutil.cpu_percent(interval=0.05))
+    cpu = float(psutil.cpu_percent(interval=None))
     vm = psutil.virtual_memory()
     try:
         battery = psutil.sensors_battery()

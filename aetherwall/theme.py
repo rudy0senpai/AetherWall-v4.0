@@ -20,9 +20,9 @@ _last_video_sample = 0.0
 _video_duration = None
 
 DEFAULT_THEME = {
-    "panel":"#070b17e8", "panelSolid":"#070b17", "text":"#f6f7ff", "muted":"#c0c8dc",
+    "panel":"#e8070b17", "panelSolid":"#070b17", "text":"#f6f7ff", "muted":"#c0c8dc",
     "accent":"#b05cff", "accent2":"#22c8ff", "accent3":"#78ff35",
-    "grid":"#9aa3bb55", "track":"#252c42cc", "edge":"#ffffff30", "shadow":"#00000088",
+    "grid":"#559aa3bb", "track":"#cc252c42", "edge":"#30ffffff", "shadow":"#88000000",
 }
 _theme = {**DEFAULT_THEME, "zones": {}}
 
@@ -31,7 +31,9 @@ def _hex(rgb, alpha=None):
     r, g, b = [max(0, min(255, int(v))) for v in rgb]
     if alpha is None:
         return f"#{r:02x}{g:02x}{b:02x}"
-    return f"#{r:02x}{g:02x}{b:02x}{max(0, min(255, int(alpha))):02x}"
+    # Qt / QML requires #AARRGGBB format for 8-digit hex colors.
+    a = max(0, min(255, int(alpha)))
+    return f"#{a:02x}{r:02x}{g:02x}{b:02x}"
 
 
 def _rel_luma(rgb):
@@ -152,20 +154,37 @@ def requested_wallpaper(path: str):
 
 
 def current_theme(force=False):
-    global _theme,_last_signature,_last_video_sample
-    path=Path(_wallpaper_path) if _wallpaper_path else None
-    if not path or not path.exists(): return dict(_theme)
-    suffix=path.suffix.lower(); is_video=suffix in {".mp4",".mkv",".webm",".mov",".avi",".m4v"}; now=time.monotonic()
+    global _theme, _last_signature, _last_video_sample
+    with _lock:
+        target_path = _wallpaper_path
+        last_video = _last_video_sample
+        last_sig = _last_signature
+        cached_theme = dict(_theme)
+    path = Path(target_path) if target_path else None
+    if not path or not path.exists():
+        return cached_theme
+    suffix = path.suffix.lower()
+    is_video = suffix in {".mp4", ".mkv", ".webm", ".mov", ".avi", ".m4v"}
+    now = time.monotonic()
     try:
         if is_video:
-            if not force and now-_last_video_sample<1.8: return dict(_theme)
-            new_theme=_load_video_theme(path); _last_video_sample=now
-            signature=(str(path),round(now/1.8))
+            if not force and (now - last_video < 1.8):
+                return cached_theme
+            new_theme = _load_video_theme(path)
+            sig = (str(path), round(now / 1.8))
         else:
-            stat=path.stat(); signature=(str(path),stat.st_mtime_ns,stat.st_size)
-            if not force and signature==_last_signature: return dict(_theme)
-            new_theme=_load_image(path)
-    except (OSError,ValueError): return dict(_theme)
-    if new_theme is None: return dict(_theme)
+            stat = path.stat()
+            sig = (str(path), stat.st_mtime_ns, stat.st_size)
+            if not force and sig == last_sig:
+                return cached_theme
+            new_theme = _load_image(path)
+    except (OSError, ValueError):
+        return cached_theme
+    if new_theme is None:
+        return cached_theme
     with _lock:
-        _theme=new_theme; _last_signature=signature; return dict(_theme)
+        _theme = new_theme
+        _last_signature = sig
+        if is_video:
+            _last_video_sample = now
+        return dict(_theme)

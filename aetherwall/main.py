@@ -63,6 +63,7 @@ class App(QMainWindow):
 
         self.library(); self.favorites(); self.reactive(); self.performance(); self.setup(); self.diagnostics()
         self.navigate(0,self.nav[0]); self.rescan()
+        psutil.cpu_percent(interval=None)
         self.timer=QTimer(self); self.timer.timeout.connect(self.tick); self.timer.start(self.refresh_interval_ms())
         self.ensure_telemetry_service(); self.telemetry_status=self.telemetry_service_status(); self.tick()
 
@@ -247,7 +248,9 @@ class App(QMainWindow):
         try:
             self.cfg['fit']=self.fit.currentText().lower(); self.cfg['wallpaper']=self.selected; save(self.cfg); result=apply(self.selected,self.cfg); self.set_status('Wallpaper + HUD applied')
             if not silent: QMessageBox.information(self,'AetherWall',result)
-        except Exception as e:self.set_status('Apply failed'); QMessageBox.critical(self,'AetherWall — Apply failed',str(e))
+        except Exception as e:
+            self.set_status('Apply failed')
+            if not silent: QMessageBox.critical(self,'AetherWall — Apply failed',str(e))
     def update_reactive_button(self):
         if hasattr(self,'reactivebtn'):
             on=bool(self.cfg.get('reactive',True)); self.reactivebtn.setChecked(on); self.reactivebtn.setText('Reactive HUD: ON' if on else 'Reactive HUD: OFF')

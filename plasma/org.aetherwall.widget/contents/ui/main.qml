@@ -32,10 +32,9 @@ PlasmoidItem {
     Rectangle {
         anchors.fill: parent
         radius: 24
-        color: "#07101de8"
+        color: "#e807101d"
         border.width: 1
-        border.color: "#ffffff48"
-        layer.enabled: true
+        border.color: "#48ffffff"
     }
     Rectangle { x: 14; y: 12; width: 110; height: 3; radius: 2; color: "#b05cff"; opacity: .7 }
     Text { x: 16; y: 24; text: "AETHERWALL"; color: "#f6f7ff"; font.pixelSize: 18; font.bold: true }
@@ -47,7 +46,7 @@ PlasmoidItem {
         model: ["CPU", "RAM", "BATTERY"]
         delegate: Item {
             x: 16 + index*111; y: 79; width: 101; height: 108
-            Rectangle { anchors.fill: parent; radius: 18; color: "#0b1424d8"; border.width: 1; border.color: index===0?"#b05cff":index===1?"#28c8ff":"#78ff35" }
+            Rectangle { anchors.fill: parent; radius: 18; color: "#d80b1424"; border.width: 1; border.color: index===0?"#b05cff":index===1?"#28c8ff":"#78ff35" }
             Text { anchors.horizontalCenter: parent.horizontalCenter; y: 15; text: modelData; color: "#f6f7ff"; font.pixelSize: 12; font.bold: true }
             Text { anchors.horizontalCenter: parent.horizontalCenter; y: 40; text: index===0?root.cpu.toFixed(1)+"%":index===1?root.ram.toFixed(1)+"%":root.battery.toFixed(1)+"%"; color: "#f6f7ff"; font.pixelSize: 21; font.bold: true }
             Rectangle { x: 13; y: 78; width: 75; height: 5; radius: 3; color: "#253149" }
